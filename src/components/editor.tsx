@@ -43,6 +43,7 @@ import {
 } from '@/lib/catalog';
 import { designSchema } from '@/lib/validation';
 import { exportPng } from '@/lib/export';
+import { prepareImage, uploadImage } from '@/lib/prepare-image';
 import { useCart } from '@/lib/cart';
 type Gesture = {
   initial: Design;
@@ -60,6 +61,7 @@ export function Editor() {
     [tab, setTab] = useState('base'),
     [text, setText] = useState('Hola, mundo'),
     [busy, setBusy] = useState(false),
+    [uploadPreview, setUploadPreview] = useState(''),
     [message, setMessage] = useState(''),
     [error, setError] = useState(''),
     [ready, setReady] = useState(false),
@@ -76,6 +78,12 @@ export function Editor() {
   current.current = design;
   const element = design.elements.find((e) => e.id === selected);
   const g = geometry(design.modelId, design.templateVersion);
+  useEffect(
+    () => () => {
+      if (uploadPreview) URL.revokeObjectURL(uploadPreview);
+    },
+    [uploadPreview],
+  );
   useEffect(() => {
     let cancelled = false;
     async function load() {
@@ -285,22 +293,19 @@ export function Editor() {
   async function upload(image: File) {
     setBusy(true);
     setError('');
+    setMessage('Preparando la imagen en tu dispositivo…');
     try {
-      if (
-        !['image/png', 'image/jpeg', 'image/webp'].includes(image.type) ||
-        image.size > 5 * 1024 * 1024
-      )
-        throw new Error('Elegí un PNG, JPG o WebP de hasta 5 MB.');
-      const form = new FormData();
-      form.set('file', image);
-      const res = await fetch('/api/assets', { method: 'POST', body: form });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      const prepared = await prepareImage(image);
+      setUploadPreview(URL.createObjectURL(prepared));
+      setMessage('Guardando tu imagen…');
+      const data = await uploadImage(prepared);
       addElement('image', data.url, data);
       setMessage('Imagen guardada y lista para editar.');
     } catch (e) {
+      setMessage('');
       setError(e instanceof Error ? e.message : 'No pudimos subir la imagen.');
     } finally {
+      setUploadPreview('');
       setBusy(false);
       if (file.current) file.current.value = '';
     }
@@ -606,6 +611,13 @@ export function Editor() {
                   <h2>Un recuerdo, siempre cerca</h2>
                 </div>
                 <div className="upload-box">
+                  {uploadPreview && (
+                    <img
+                      src={uploadPreview}
+                      alt="Vista previa de la imagen que se está guardando"
+                      style={{ maxWidth: '100%', maxHeight: 160, objectFit: 'contain' }}
+                    />
+                  )}
                   <Upload size={30} strokeWidth={1.3} />
                   <h3>Tu foto favorita va acá</h3>
                   <p>PNG, JPG o WebP · Hasta 5 MB</p>

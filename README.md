@@ -2,6 +2,8 @@
 
 E-commerce local de fundas de iPhone con editor 2D y previsualización 3D interactiva, catálogo, carrito persistente y pedidos de demostración. Interfaz en español de Uruguay; importes enteros en UYU. **No procesa dinero ni realiza envíos.**
 
+Para el despliegue publicado, seguir **[Configuración de Vercel, Blob y PostgreSQL](docs/vercel.md)**. En Vercel no usar SQLite ni carpetas locales para persistencia.
+
 ## Iniciar
 
 Requisitos: Node.js 22.12 o superior (verificado con Node 24) y npm. Ejecutar desde la carpeta del proyecto.
@@ -52,7 +54,7 @@ La configuración de idioma, moneda y envío está en `src/lib/catalog.ts`. Los 
 - Recorte común en pantalla y exportación: superficie de la funda menos el área de cámara. Los elementos pueden quedar parcialmente recortados, pero nunca se imprimen fuera de esa máscara.
 - Borrador automático local, copias inmutables de diseño en SQLite y enlaces para recuperarlas en el mismo navegador.
 - Exportación PNG transparente a 4×: vista comercial con cámaras y acabado, o composición sin cámaras ni efectos. Configuración JSON descargable desde pedidos personalizados.
-- Imágenes verificadas por contenido y decodificadas con Sharp, orientación corregida, metadatos eliminados, WebP persistente de hasta 2048 px; proporción visual conservada. Límite de entrada de 5 MB y 25 megapíxeles.
+- Imágenes verificadas por contenido y decodificadas con Sharp, orientación corregida, metadatos eliminados, WebP persistente de hasta 2048 px; proporción visual conservada. Originales de hasta 5 MiB y 25 megapíxeles; preparación en navegador y transferencia al servidor de hasta 3 MiB.
 - Carrito Zustand persistente con miniaturas, cantidades 1–20 y diseños independientes.
 - Checkout validado, pedido e ítems guardados juntos, precios recalculados en servidor, instantáneas de diseño/precio e idempotencia ante reintentos.
 - Confirmación recuperable por enlace aleatorio. No expone los datos de contacto guardados. Carrito vaciado únicamente después de una respuesta exitosa.
@@ -86,7 +88,7 @@ src/lib/
   validation.ts           Esquemas Zod compartidos
   db.ts                   Cliente Prisma
   orders.ts               Servicio de creación de pedidos
-  storage.ts              Contrato AssetStorage y adaptador de disco
+  storage.ts              Adaptadores AssetStorage: disco local / Blob privado
   payments.ts             Contrato PaymentProvider y proveedor demo
   server.ts               Sesión, origen, límites de cuerpo y errores
   cart.ts                 Estado global persistente
@@ -102,7 +104,7 @@ Entidades: `Product`, `Category`, `PhoneModel`, `Material`, `Asset`, `Design`, `
 
 ## Pruebas
 
-Verificación realizada el 11 de octubre de 2026: TypeScript y compilación de producción correctos, 8 pruebas de lógica y 18 pruebas de navegador aprobadas (9 por resolución), y `npm audit` sin vulnerabilidades reportadas. La suite completa se ejecutó también contra `npm start`. Se comprobaron los 16 modelos en WebGL, giro táctil, sincronización del diseño, alternativa sin WebGL, arrastre con mouse, gestos táctiles emulados y píxeles transparentes de cámara/flash/exterior en la exportación PNG. Se corrigió la superposición de la vista previa sobre controles móviles. Las capturas de inicio, tienda y editor no presentaron desbordamientos horizontales en 1440 px y 390 px.
+Verificación realizada el 11 de octubre de 2026: TypeScript y compilación de producción correctos, 12 pruebas de lógica y 24 casos de navegador verificados (12 por resolución), y `npm audit` sin vulnerabilidades reportadas. Los casos se ejecutaron contra `npm start`; las nuevas pruebas de subida cubren originales mayores de 4,5 MB, archivos inválidos y errores no JSON. Se verificó además la compilación con el cliente PostgreSQL y variables de Vercel, sin conexión a servicios remotos. Se comprobaron los 16 modelos en WebGL, giro táctil, sincronización del diseño, alternativa sin WebGL, arrastre con mouse, gestos táctiles emulados y píxeles transparentes de cámara/flash/exterior en la exportación PNG. Se corrigió la superposición de la vista previa sobre controles móviles. Las capturas de inicio, tienda y editor no presentaron desbordamientos horizontales en 1440 px y 390 px.
 
 ```powershell
 npm run typecheck
@@ -143,6 +145,8 @@ La configuración tiene `version: 1` y los diseños nuevos incluyen `templateVer
 
 La base inicial es `prisma/dev.db`. Los archivos están en `storage/uploads/`. Respaldar **ambos juntos**; conservar solo SQLite no recupera las imágenes. Las miniaturas se reconstruyen con el mismo SVG a partir del JSON. El resumen del pedido tiene la instantánea completa de cada funda, incluso si cambian los precios del catálogo.
 
+En Vercel, PostgreSQL conserva registros y Vercel Blob privado conserva imágenes; cada recurso registra su proveedor. Los originales se preparan en el navegador y las subidas al servidor se limitan a 3 MiB para respetar el máximo de Vercel. Ver `docs/vercel.md`.
+
 El borrador y el carrito viven en localStorage; no sustituyen el guardado en servidor. La cookie HttpOnly `icases-session` vincula el navegador con los diseños y las subidas. Recuperar un enlace de diseño exige esa cookie. El enlace aleatorio de pedido y las URLs aleatorias de imágenes funcionan como enlaces privados por posesión: no publicarlos ni usarlos como sustituto de autorización para información sensible.
 
 Para reiniciar totalmente una demo local, primero detener Next, respaldar si hace falta, eliminar manualmente `prisma/dev.db` y `storage/uploads/`, limpiar los datos del sitio en el navegador y volver a ejecutar `setup`. El seed solo nunca elimina pedidos.
@@ -151,8 +155,8 @@ Para reiniciar totalmente una demo local, primero detener Next, respaldar si hac
 
 Esta entrega es un MVP local funcional. Quedan fuera del alcance: pagos reales, envío real, cuentas, administración e inventario avanzado.
 
-1. Cambiar `provider` de Prisma a `postgresql`, definir una URL PostgreSQL y crear migraciones versionadas con `prisma migrate`. Migrar catálogo, diseños, pedidos e identificadores; no copiar directamente un archivo SQLite. En producción usar `prisma migrate deploy`, no `db push`.
-2. Sustituir `AssetStorage` por S3/R2 u otro almacenamiento durable. Mantener las URLs de la aplicación o resolver los IDs a URLs firmadas. Añadir política de retención, limpieza de subidas huérfanas, cuotas y backups.
+1. Configurar PostgreSQL persistente siguiendo `docs/vercel.md`. El script Prisma selecciona el proveedor según `DATABASE_URL`; migrar los datos históricos manteniendo identificadores y establecer migraciones versionadas antes de seguir ampliando el esquema.
+2. Conectar Vercel Blob privado y migrar los recursos locales según `docs/vercel.md`. El adaptador ya está implementado. Añadir política de retención, limpieza de subidas huérfanas, cuotas y backups.
 3. Configurar HTTPS, `COOKIE_SECURE=true` y `APP_ORIGIN` exacto detrás del proxy. Añadir límites de frecuencia/carga en el perímetro, observabilidad y control de acceso para pedidos y archivos privados. El MVP tiene límites de cuerpo, validación de contenido y protección de origen, pero no cuotas distribuidas ni cuentas.
 4. Reemplazar el proveedor demo por una integración de pagos con credenciales solo en servidor, verificación de webhooks e idempotencia de la pasarela. No marcar un pedido como pagado desde el navegador.
 5. Definir logística, impuestos, política de privacidad comercial y canales de atención reales. Los textos actuales identifican explícitamente la demo.

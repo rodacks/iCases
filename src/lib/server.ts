@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { randomUUID } from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
-import { PublicError } from './errors';
+import { PublicError, ServiceUnavailableError } from './errors';
 export async function owner() {
   const jar = await cookies();
   let id = jar.get('icases-session')?.value;
@@ -66,8 +66,10 @@ export function failure(e: unknown) {
   return NextResponse.json(
     {
       error:
-        e instanceof PublicError ? e.message : 'No pudimos guardar los datos. Intentá de nuevo.',
+        e instanceof PublicError || e instanceof ServiceUnavailableError
+          ? e.message
+          : 'No pudimos guardar los datos. Intentá de nuevo.',
     },
-    { status: e instanceof PublicError ? 400 : 500 },
+    { status: e instanceof PublicError ? 400 : e instanceof ServiceUnavailableError ? 503 : 500 },
   );
 }

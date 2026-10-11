@@ -41,6 +41,7 @@ model Asset {
   mime String
   width Int
   height Int
+  storageProvider String @default("local")
   createdAt DateTime @default(now())
 }
 model Design {
