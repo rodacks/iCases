@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+model Category {
+  id String @id
+  name String
+  products Product[]
+}
+model PhoneModel {
+  id String @id
+  name String
+  extra Int
+  shape String
+}
+model Material {
+  id String @id
+  name String
+  description String
+  price Int
+}
+model Product {
+  id String @id
+  name String
+  description String
+  price Int
+  color String
+  pattern String
+  materialId String
+  models String
+  available Boolean @default(true)
+  categoryId String
+  category Category @relation(fields: [categoryId], references: [id])
+}
+model Asset {
+  id String @id
+  owner String
+  mime String
+  width Int
+  height Int
+  createdAt DateTime @default(now())
+}
+model Design {
+  id String @id
+  owner String
+  configuration String
+  price Int
+  createdAt DateTime @default(now())
+}
+model Order {
+  id String @id
+  number String @unique
+  requestId String @unique
+  owner String
+  customer String
+  total Int
+  paymentStatus String @default("DEMO_NO_CHARGE")
+  createdAt DateTime @default(now())
+  items OrderItem[]
+}
+model OrderItem {
+  id String @id @default(cuid())
+  orderId String
+  order Order @relation(fields: [orderId], references: [id])
+  kind String
+  productId String?
+  designId String?
+  name String
+  modelId String
+  materialId String
+  quantity Int
+  unitPrice Int
+  snapshot String
+}

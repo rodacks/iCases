@@ -1,0 +1,1092 @@
+/* Stronger typography, tighter rhythm and shared three-dimensional product previews. */
+:root {
+  --font-sans: 'Manrope Variable', Arial, sans-serif;
+  --muted: #64705f;
+}
+body {
+  font-family: var(--font-sans);
+  font-weight: 450;
+  font-size: 14px;
+}
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.055em;
+}
+h1 {
+  font-weight: 800;
+}
+h3 {
+  letter-spacing: -0.035em;
+}
+.logo {
+  font-weight: 850;
+  letter-spacing: -0.08em;
+}
+.header {
+  height: 74px;
+}
+.nav a {
+  font-size: 12px;
+  font-weight: 650;
+}
+.nav a.active:after {
+  width: 15px;
+  height: 2px;
+  border-radius: 1px;
+  left: calc(50% - 7px);
+}
+.announcement {
+  font-size: 10px;
+  font-weight: 550;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+.button {
+  font-weight: 750;
+  font-size: 12px;
+  min-height: 45px;
+  border-radius: 7px;
+  letter-spacing: -0.015em;
+}
+.text-link {
+  font-weight: 700;
+}
+.section-space {
+  padding-top: 58px;
+  padding-bottom: 54px;
+}
+.section-heading {
+  margin-bottom: 26px;
+}
+.section-heading h2 {
+  font-size: 34px;
+  letter-spacing: -0.055em;
+}
+.section-heading p {
+  margin-top: 10px;
+}
+.hero {
+  min-height: 540px;
+  padding-top: 32px;
+  padding-bottom: 36px;
+  gap: 36px;
+}
+.hero-copy h1 {
+  font-size: clamp(60px, 5.9vw, 80px);
+  line-height: 0.99;
+  letter-spacing: -0.073em;
+  margin: 21px 0;
+}
+.hero-copy h1 em {
+  font-weight: 650;
+}
+.hero-copy > p {
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 360px;
+}
+.hero-buttons {
+  margin-top: 22px;
+}
+.hero-note {
+  margin-top: 21px;
+  font-weight: 550;
+}
+.hero-art {
+  height: 472px;
+  border-radius: 22px;
+  background: #eeefe8;
+  background-image: radial-gradient(ellipse at 45% 30%, #ffffffde, transparent 68%);
+}
+.hero-orbit {
+  display: none;
+}
+.art-caption {
+  font-weight: 750;
+  top: 20px;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+}
+.floating-case {
+  filter: drop-shadow(14px 25px 13px #26351f22);
+}
+.case-back {
+  width: 220px;
+  left: -38px;
+  top: 96px;
+  transform: rotate(-16deg);
+}
+.case-front {
+  width: 243px;
+  left: calc(50% - 122px);
+  top: 48px;
+  transform: rotate(7deg);
+}
+.case-side {
+  width: 212px;
+  right: -31px;
+  top: 82px;
+  transform: rotate(20deg);
+}
+.art-badge {
+  bottom: 46px;
+  padding: 11px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px #33462908;
+  font-weight: 550;
+  font-size: 10px;
+}
+.art-badge strong {
+  font-weight: 800;
+}
+.art-bottom {
+  bottom: 15px;
+  font-weight: 650;
+  font-size: 8px;
+}
+.ticker {
+  padding: 13px 25px;
+  font-weight: 750;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+.product-grid {
+  gap: 19px;
+}
+.product-visual {
+  height: 290px;
+  border-radius: 10px;
+  background-image: radial-gradient(ellipse at 40% 25%, #ffffff70, transparent 75%);
+}
+.product-tag {
+  font-weight: 700;
+  font-size: 9px;
+  padding: 4px 9px;
+}
+.product-meta {
+  padding: 13px 0;
+}
+.product-meta h3 {
+  font-size: 16px;
+  font-weight: 800;
+}
+.product-meta p {
+  font-size: 11px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+.product-meta strong {
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+}
+.product-meta small {
+  font-weight: 550;
+  font-size: 9px;
+}
+.create-banner {
+  min-height: 365px;
+}
+.banner-copy {
+  padding-top: 43px;
+  padding-bottom: 39px;
+}
+.banner-copy h2 {
+  font-size: 45px;
+  margin: 13px 0 17px;
+}
+.banner-copy p {
+  font-size: 13px;
+}
+.sticker-one {
+  top: 70px;
+}
+.sticker-two {
+  top: 28px;
+}
+.sticker-three {
+  bottom: 52px;
+}
+.scribble {
+  bottom: 23px;
+}
+.steps {
+  margin-top: 28px;
+  gap: 38px;
+}
+.steps > div {
+  padding-top: 19px;
+}
+.steps span {
+  font-weight: 700;
+  font-size: 25px;
+}
+.steps h3 {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: 750;
+}
+.steps p {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.materials-section {
+  padding: 48px 0;
+}
+.material-card h3 {
+  font-weight: 750;
+}
+.material-card p {
+  font-size: 12px;
+}
+.material-sample {
+  height: 100px;
+}
+.mood-links a {
+  padding: 20px;
+}
+.mood-links h3 {
+  font-weight: 750;
+}
+.benefits {
+  margin-top: 48px;
+  padding-top: 34px;
+}
+.benefits h3 {
+  font-weight: 800;
+}
+.benefits p {
+  font-size: 12px;
+}
+footer {
+  padding-top: 40px;
+}
+.footer-top {
+  padding-bottom: 29px;
+}
+.footer-top strong {
+  font-size: 12px;
+  font-weight: 750;
+}
+.footer-top > div > a:not(.logo) {
+  font-size: 12px;
+}
+.footer-top p {
+  font-size: 12px;
+}
+.footer-bottom {
+  font-size: 10px;
+}
+.page-space {
+  padding-top: 36px;
+  padding-bottom: 64px;
+}
+.page-title {
+  font-size: 49px;
+  margin: 12px 0;
+}
+.page-intro {
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+.category-tabs button {
+  font-weight: 650;
+}
+.results-count {
+  font-size: 12px;
+  margin: 21px 0 15px;
+}
+.product-detail {
+  gap: 62px;
+  margin-top: 24px;
+}
+.detail-art {
+  min-height: 530px;
+  background: radial-gradient(ellipse at 40% 28%, #f7f9f0, #e5e9dd);
+  overflow: hidden;
+  border-radius: 16px;
+}
+.detail-info {
+  padding: 20px 0;
+}
+.detail-info h1 {
+  font-size: 48px;
+}
+.detail-price {
+  font-size: 28px;
+  font-weight: 750;
+}
+.detail-price small {
+  font-weight: 550;
+}
+.material-info strong {
+  font-weight: 750;
+}
+.field {
+  font-weight: 700;
+}
+.small-note {
+  font-size: 11px;
+  line-height: 1.65;
+}
+.availability {
+  font-weight: 600;
+}
+.editor-page {
+  padding-top: 20px;
+}
+.editor-heading {
+  padding-bottom: 20px;
+}
+.editor-heading h1 {
+  font-size: 25px;
+}
+.editor-heading h1 span {
+  font-size: 12px;
+  font-weight: 500;
+}
+.editor-layout {
+  min-height: 645px;
+  grid-template-columns: 300px minmax(280px, 1fr) 250px;
+}
+.editor-tools {
+  max-height: 740px;
+}
+.tool-title h2 {
+  font-size: 16px;
+  font-weight: 800;
+}
+.tool-title {
+  margin-bottom: 18px;
+}
+.tool-tabs {
+  padding-top: 10px;
+}
+.tool-tabs button {
+  font-weight: 750;
+  font-size: 10px;
+}
+.tool-content {
+  padding: 20px 18px;
+}
+.tool-content .field {
+  font-size: 12px;
+}
+.tool-content select {
+  font-size: 12px;
+}
+.pattern-grid button {
+  font-size: 10px;
+  font-weight: 650;
+}
+.editor-canvas-panel {
+  background-image: none;
+  background-color: #eff1e9;
+  padding-top: 18px;
+}
+.canvas-stage {
+  min-height: 425px;
+  padding: 18px 0;
+}
+.editing-case {
+  height: 410px;
+}
+.canvas-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  min-height: 36px;
+  gap: 6px;
+}
+.canvas-label .preview-switch {
+  margin-left: auto;
+}
+.preview-switch {
+  display: flex;
+  padding: 3px;
+  gap: 3px;
+  background: #e1e7d8;
+  border-radius: 8px;
+  letter-spacing: 0;
+}
+.preview-switch button {
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 750;
+  border-radius: 5px;
+  padding: 6px 11px;
+  color: #64715b;
+  min-height: 32px;
+  white-space: nowrap;
+}
+.preview-switch button[aria-pressed='true'] {
+  color: #26352c;
+  background: #fff;
+  box-shadow: 0 1px 4px #26352c12;
+}
+.edit-surface {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.edit-surface.is-hidden {
+  position: absolute;
+  width: 280px;
+  left: -10000px;
+  pointer-events: none;
+  visibility: hidden;
+}
+.canvas-help {
+  font-size: 11px;
+  line-height: 1.65;
+}
+.editor-canvas-panel > .small-note {
+  font-size: 10px;
+}
+.canvas-bottom {
+  font-size: 11px;
+  font-weight: 650;
+}
+.canvas-bottom .text-link {
+  font-size: 10px;
+}
+.design-summary {
+  padding: 27px 20px;
+}
+.design-summary h2 {
+  font-size: 25px;
+  font-weight: 800;
+  margin: 12px 0 20px;
+}
+.design-summary > .eyebrow {
+  font-size: 9px;
+}
+.summary-specs p {
+  font-size: 11px;
+}
+.summary-specs strong {
+  font-weight: 750;
+}
+.design-total > strong {
+  font-weight: 800;
+  font-size: 34px;
+}
+.design-total > span {
+  font-size: 11px;
+}
+.design-summary .button {
+  font-size: 12px;
+  font-weight: 750;
+}
+.design-summary .small-note {
+  font-size: 11px;
+}
+.export-actions {
+  gap: 13px;
+  margin-top: 23px;
+  padding-top: 18px;
+}
+.export-actions .text-link {
+  font-size: 11px;
+}
+.save-indicator {
+  font-size: 10px;
+}
+.order-summary h2 {
+  font-size: 24px;
+  font-weight: 800;
+}
+.order-summary p strong {
+  font-weight: 750;
+}
+.cart-info h2 {
+  font-weight: 750;
+}
+.cart-info p {
+  font-size: 12px;
+}
+.cart-line-end strong {
+  font-weight: 800;
+}
+.quantity button {
+  min-height: 36px;
+}
+.order-summary .small-note {
+  font-size: 11px;
+}
+.case-preview {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+}
+.case-preview.is-static {
+  aspect-ratio: 3/5;
+}
+.rendered-phone {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+.preview-fallback {
+  position: absolute;
+  inset: 5% 10%;
+  width: 80%;
+  height: 90%;
+}
+.texture-source {
+  position: absolute;
+  width: 280px;
+  height: 500px;
+  left: -10000px;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.product-visual .case-preview.product-case {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  transform: none;
+  filter: drop-shadow(11px 13px 8px #30372625);
+  transition: transform 0.4s ease;
+}
+.product-card:hover .case-preview.product-case {
+  transform: scale(1.04) translateY(-3px);
+}
+.floating-case > .case-preview {
+  width: 100%;
+  height: auto;
+}
+.detail-art > .case-preview {
+  height: 520px;
+  width: 100%;
+  position: relative;
+}
+.detail-art > .case-preview svg {
+  transform: none;
+  filter: none;
+}
+.case-preview.is-interactive {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+}
+.three-viewport {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+.three-viewport canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+}
+.three-viewport canvas:active {
+  cursor: grabbing;
+}
+.viewer-controls {
+  position: absolute;
+  bottom: 8px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  z-index: 2;
+}
+.viewer-controls > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #677361;
+  font-size: 11px;
+  font-weight: 650;
+}
+.viewer-controls > div {
+  display: flex;
+  gap: 3px;
+  background: #ffffffbb;
+  border: 1px solid #ffffff;
+  border-radius: 9px;
+  padding: 3px;
+}
+.viewer-controls button {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: #30422a;
+  border: 0;
+  background: transparent;
+  border-radius: 6px;
+}
+.viewer-controls button:hover {
+  background: #e3e9da;
+}
+.viewer-fallback-note {
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  width: 100%;
+  font-size: 11px;
+  color: #64705f;
+}
+.detail-art > span {
+  bottom: 13px;
+  font-size: 10px;
+}
+.detail-art .viewer-controls {
+  bottom: 41px;
+}
+.canvas-stage.show-3d {
+  height: 445px;
+  min-height: 445px;
+  padding: 0;
+}
+.show-3d > .case-preview {
+  height: 100%;
+}
+@media (max-width: 1150px) {
+  .editor-layout {
+    grid-template-columns: 275px minmax(230px, 1fr) 225px;
+  }
+  .canvas-label {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .preview-switch button {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+  .hero-art {
+    height: 440px;
+  }
+  .case-front {
+    width: 225px;
+    left: calc(50% - 113px);
+    top: 50px;
+  }
+  .case-back {
+    width: 195px;
+    left: -43px;
+    top: 100px;
+  }
+  .case-side {
+    width: 190px;
+    right: -42px;
+    top: 85px;
+  }
+  .hero {
+    gap: 22px;
+  }
+  .hero-copy h1 {
+    font-size: 64px;
+  }
+  .product-visual {
+    height: 260px;
+  }
+}
+@media (max-width: 900px) {
+  .editor-layout {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+  .design-summary {
+    padding: 22px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .editor-tools {
+    max-height: 720px;
+  }
+  .hero {
+    min-height: 500px;
+  }
+  .hero-art {
+    height: 405px;
+  }
+  .hero-copy h1 {
+    font-size: 56px;
+  }
+  .case-front {
+    width: 210px;
+    left: calc(50% - 105px);
+    top: 50px;
+  }
+  .case-back {
+    width: 172px;
+    left: -45px;
+    top: 112px;
+  }
+  .case-side {
+    width: 172px;
+    right: -40px;
+    top: 85px;
+  }
+  .product-visual {
+    height: 315px;
+  }
+  .detail-art {
+    min-height: 460px;
+  }
+  .detail-art > .case-preview {
+    height: 450px;
+  }
+  .product-detail {
+    gap: 30px;
+  }
+  .detail-info h1 {
+    font-size: 40px;
+  }
+  .hero-copy > p {
+    font-size: 13px;
+  }
+  .banner-copy h2 {
+    font-size: 39px;
+  }
+  .section-heading h2 {
+    font-size: 31px;
+  }
+  .small-note {
+    font-size: 11px;
+  }
+}
+@media (max-width: 600px) {
+  .header {
+    height: 62px;
+  }
+  .nav {
+    top: 62px;
+  }
+  .nav a {
+    font-size: 14px;
+  }
+  .hero {
+    padding-top: 29px;
+    padding-bottom: 24px;
+    gap: 23px;
+  }
+  .hero-copy h1 {
+    font-size: 59px;
+    margin: 18px 0;
+    line-height: 1.01;
+    letter-spacing: -0.07em;
+  }
+  .hero-copy > p {
+    font-size: 13px;
+    max-width: 330px;
+  }
+  .hero-buttons {
+    margin-top: 18px;
+  }
+  .hero-buttons .button {
+    font-size: 11px;
+    font-weight: 750;
+    min-height: 44px;
+  }
+  .hero-note {
+    margin-top: 16px;
+    font-size: 10px;
+  }
+  .hero-art {
+    height: 345px;
+    border-radius: 16px;
+  }
+  .case-front {
+    width: 198px;
+    left: calc(50% - 99px);
+    top: 23px;
+  }
+  .case-back {
+    width: 163px;
+    left: -29px;
+    top: 77px;
+  }
+  .case-side {
+    width: 162px;
+    right: -22px;
+    top: 59px;
+  }
+  .art-caption {
+    top: 14px;
+    font-size: 7px;
+  }
+  .art-badge {
+    bottom: 29px;
+    left: 12px;
+    padding: 9px 12px;
+    font-size: 9px;
+  }
+  .art-bottom {
+    bottom: 11px;
+    font-size: 7px;
+  }
+  .ticker {
+    padding: 10px 20px;
+    font-size: 8px;
+  }
+  .section-space {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+  .section-heading {
+    gap: 15px;
+    margin-bottom: 21px;
+  }
+  .section-heading h2 {
+    font-size: 29px;
+  }
+  .section-heading p {
+    font-size: 12px;
+  }
+  .product-grid {
+    gap: 14px 12px;
+  }
+  .product-visual {
+    height: 218px;
+  }
+  .product-meta h3 {
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .product-meta strong {
+    font-size: 12px;
+  }
+  .product-meta p {
+    font-size: 10px;
+  }
+  .product-meta {
+    padding: 11px 0;
+    flex-wrap: wrap;
+  }
+  .product-meta strong small {
+    display: none;
+  }
+  .product-tag {
+    font-size: 8px;
+  }
+  .create-banner {
+    min-height: 0;
+  }
+  .banner-art {
+    min-height: 235px;
+  }
+  .banner-copy {
+    padding: 9px 24px 28px;
+  }
+  .banner-copy h2 {
+    font-size: 38px;
+  }
+  .banner-copy p {
+    font-size: 12px;
+  }
+  .sticker-one {
+    top: 35px;
+  }
+  .sticker-two {
+    top: 24px;
+  }
+  .sticker-three {
+    bottom: 20px;
+  }
+  .scribble {
+    bottom: 12px;
+  }
+  .steps {
+    gap: 20px;
+  }
+  .steps > div {
+    padding-top: 18px;
+  }
+  .steps h3 {
+    font-size: 18px;
+    margin-top: 0;
+  }
+  .steps > div > span {
+    top: 18px;
+  }
+  .materials-section {
+    padding: 35px 0;
+  }
+  .material-sample {
+    height: 85px;
+  }
+  .material-card p {
+    font-size: 11px;
+  }
+  .benefits {
+    margin-top: 32px;
+    padding-top: 26px;
+  }
+  .benefits p {
+    font-size: 11px;
+  }
+  .mood-links a {
+    padding: 15px 12px;
+  }
+  .page-title {
+    font-size: 40px;
+  }
+  .page-space {
+    padding-top: 27px;
+    padding-bottom: 42px;
+  }
+  .page-intro {
+    font-size: 13px;
+  }
+  .category-tabs {
+    margin: 16px 0;
+  }
+  .category-tabs button {
+    font-size: 11px;
+  }
+  .shop-controls select {
+    font-size: 11px;
+  }
+  .results-count {
+    font-size: 11px;
+  }
+  .detail-art {
+    min-height: 400px;
+  }
+  .detail-art > .case-preview {
+    height: 400px;
+  }
+  .detail-art .viewer-controls {
+    bottom: 34px;
+    gap: 12px;
+  }
+  .detail-art > span {
+    font-size: 9px;
+    bottom: 11px;
+  }
+  .detail-info h1 {
+    font-size: 39px;
+  }
+  .viewer-controls > span {
+    font-size: 10px;
+  }
+  .viewer-controls button {
+    width: 34px;
+    height: 34px;
+  }
+  .detail-art .viewer-controls button {
+    width: 40px;
+    height: 40px;
+  }
+  .editor-page {
+    padding-top: 14px;
+  }
+  .editor-heading h1 {
+    font-size: 20px;
+    letter-spacing: -0.05em;
+  }
+  .editor-heading {
+    padding-bottom: 15px;
+  }
+  .editor-top-actions .button {
+    font-size: 9px;
+    font-weight: 750;
+  }
+  .editor-canvas-panel {
+    position: relative;
+    top: auto;
+    padding: 11px 12px 9px;
+  }
+  .canvas-label {
+    font-size: 8px;
+    letter-spacing: 0;
+    min-height: 35px;
+  }
+  .canvas-label .preview-switch {
+    margin-left: auto;
+  }
+  .preview-switch button {
+    font-size: 10px;
+    min-height: 33px;
+    padding: 5px 9px;
+  }
+  .canvas-stage {
+    min-height: 252px;
+    padding: 9px 0 6px;
+  }
+  .editing-case {
+    height: 245px;
+  }
+  .canvas-stage.show-3d {
+    height: 286px;
+    min-height: 286px;
+  }
+  .canvas-stage.show-3d .viewer-controls {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    gap: 10px;
+  }
+  .canvas-help {
+    font-size: 9px;
+    margin-top: 7px;
+  }
+  .editor-canvas-panel > .small-note {
+    font-size: 9px;
+  }
+  .canvas-bottom {
+    font-size: 10px;
+    margin-top: 8px;
+    padding-top: 6px;
+  }
+  .canvas-bottom .text-link {
+    font-size: 10px;
+  }
+  .editor-tools {
+    max-height: none;
+  }
+  .tool-tabs button {
+    font-size: 10px;
+  }
+  .tool-title h2 {
+    font-size: 17px;
+  }
+  .tool-content {
+    padding: 18px;
+  }
+  .design-summary {
+    padding: 22px;
+  }
+  .design-summary h2 {
+    font-size: 27px;
+  }
+  .summary-specs p {
+    font-size: 12px;
+  }
+  .design-summary .export-actions .text-link {
+    font-size: 12px;
+  }
+  .design-summary .small-note {
+    font-size: 11px;
+  }
+  .canvas-stage .case-preview.is-interactive {
+    min-height: 250px;
+  }
+  .footer-top > div > a:not(.logo) {
+    font-size: 11px;
+  }
+  .footer-bottom {
+    font-size: 9px;
+  }
+}
