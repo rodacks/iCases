@@ -24,20 +24,7 @@ Referencias: [límites de Functions](https://vercel.com/docs/functions/limitatio
 
 ## Preparar las tablas y desplegar
 
-`prisma/schema.prisma` continúa como fuente única. `scripts/prisma.mjs` genera `prisma/schema.postgresql.prisma` al detectar una URL PostgreSQL. Los mismos modelos y tipos se utilizan en ambos motores. El build regenera Prisma para evitar el cliente SQLite cacheado en Vercel y rechaza expresamente una URL SQLite si detecta Vercel.
-
-Para una **base PostgreSQL nueva**, establecer `DATABASE_URL` en una terminal local segura (o `.env` local ignorado), apuntando a la nueva base, y ejecutar:
-
-```powershell
-npm ci
-npm run setup
-```
-
-Esto genera el cliente correcto, crea las tablas y carga el catálogo. Para inicializar la base puede ser necesaria la URL directa del proveedor, mientras Vercel utiliza la URL con pool. Las credenciales nunca deben compartirse en el chat ni incluirse en commits. Al volver al desarrollo SQLite, restaurar `DATABASE_URL=file:./dev.db` y ejecutar `npm run db:generate`.
-
-Para una base PostgreSQL **existente**, respaldarla primero y revisar el cambio de esquema: `Asset.storageProvider` es una columna nueva con valor predeterminado `local`. `npm run db:push` aplica el esquema sin aceptar pérdidas de datos automáticamente. En un entorno con migraciones administradas, generar y revisar la migración equivalente en ese flujo; no reemplazar su historial por `db push`. El build normal no modifica tablas ni carga seed.
-
-Vercel debe usar **Build Command: `npm run build`** (no directamente `next build`) e Install Command `npm ci`. Subir todos los archivos modificados y nuevos, incluido `package-lock.json`, al repositorio conectado y desplegar. Es necesario inicializar las tablas antes de usar la tienda. No se ha configurado ni desplegado ningún servicio remoto desde este cambio.
+Seguir [la guía Neon: configuración, migraciones y despliegue](neon.md). `vercel.json` ejecuta `npm run vercel-build`: generación del cliente, migraciones PostgreSQL y compilación. El catálogo se carga una vez con `npm run setup` usando las URLs Neon. Para bases existentes, revisar el procedimiento de baseline antes de desplegar. SQLite sigue disponible para desarrollo local.
 
 ## Datos e imágenes anteriores
 

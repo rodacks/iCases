@@ -19,7 +19,7 @@ En macOS/Linux, usar `cp .env.example .env` en lugar de `Copy-Item`. No sobrescr
 
 Abrir **http://127.0.0.1:3000**. El servidor escucha únicamente en loopback de forma predeterminada. Para probar desde un teléfono físico en la misma red, ejecutar `npx next dev --hostname 0.0.0.0` y abrir la IP local del equipo. No establecer `APP_ORIGIN` durante esa prueba, o configurarlo con la URL exacta usada por el teléfono. Usar solo en una red de confianza.
 
-`setup` genera Prisma, prepara el archivo SQLite si no existe, sincroniza el esquema y ejecuta el seed. El paso de preparación evita un fallo del motor de Prisma en Windows al abrir un archivo SQLite inexistente. No trunca una base existente. El seed es repetible: actualiza el catálogo inicial y conserva diseños, archivos y pedidos.
+`setup` genera Prisma, prepara el archivo SQLite si no existe, sincroniza el esquema local y ejecuta el seed. Con PostgreSQL aplica migraciones versionadas en lugar de `db push`. El paso de preparación evita un fallo del motor de Prisma en Windows al abrir un archivo SQLite inexistente. No trunca una base existente. El seed es repetible: actualiza el catálogo inicial y conserva diseños, archivos y pedidos.
 
 Producción local:
 
@@ -104,7 +104,7 @@ Entidades: `Product`, `Category`, `PhoneModel`, `Material`, `Asset`, `Design`, `
 
 ## Pruebas
 
-Verificación realizada el 11 de octubre de 2026: TypeScript y compilación de producción correctos, 12 pruebas de lógica y 24 casos de navegador verificados (12 por resolución), y `npm audit` sin vulnerabilidades reportadas. Los casos se ejecutaron contra `npm start`; las nuevas pruebas de subida cubren originales mayores de 4,5 MB, archivos inválidos y errores no JSON. Se verificó además la compilación con el cliente PostgreSQL y variables de Vercel, sin conexión a servicios remotos. Se comprobaron los 16 modelos en WebGL, giro táctil, sincronización del diseño, alternativa sin WebGL, arrastre con mouse, gestos táctiles emulados y píxeles transparentes de cámara/flash/exterior en la exportación PNG. Se corrigió la superposición de la vista previa sobre controles móviles. Las capturas de inicio, tienda y editor no presentaron desbordamientos horizontales en 1440 px y 390 px.
+Verificación realizada el 11 de octubre de 2026: TypeScript y compilación de producción correctos, 15 pruebas de lógica y 24 casos de navegador verificados (12 por resolución), y `npm audit` sin vulnerabilidades reportadas. Los casos se ejecutaron contra `npm start`; las nuevas pruebas de subida cubren originales mayores de 4,5 MB, archivos inválidos y errores no JSON. Se verificó además la compilación con el cliente PostgreSQL y variables de Vercel, sin conexión a servicios remotos. Se comprobaron los 16 modelos en WebGL, giro táctil, sincronización del diseño, alternativa sin WebGL, arrastre con mouse, gestos táctiles emulados y píxeles transparentes de cámara/flash/exterior en la exportación PNG. Se corrigió la superposición de la vista previa sobre controles móviles. Las capturas de inicio, tienda y editor no presentaron desbordamientos horizontales en 1440 px y 390 px.
 
 ```powershell
 npm run typecheck
@@ -155,7 +155,7 @@ Para reiniciar totalmente una demo local, primero detener Next, respaldar si hac
 
 Esta entrega es un MVP local funcional. Quedan fuera del alcance: pagos reales, envío real, cuentas, administración e inventario avanzado.
 
-1. Configurar PostgreSQL persistente siguiendo `docs/vercel.md`. El script Prisma selecciona el proveedor según `DATABASE_URL`; migrar los datos históricos manteniendo identificadores y establecer migraciones versionadas antes de seguir ampliando el esquema.
+1. Configurar PostgreSQL persistente siguiendo `docs/vercel.md`. El script Prisma selecciona el proveedor según `DATABASE_URL`; migrar los datos históricos manteniendo identificadores y usar las migraciones versionadas de `prisma/migrations`. Ver [Neon y despliegue](docs/neon.md). `vercel.json` ejecuta `npm run vercel-build` para generar Prisma, migrar y compilar.
 2. Conectar Vercel Blob privado y migrar los recursos locales según `docs/vercel.md`. El adaptador ya está implementado. Añadir política de retención, limpieza de subidas huérfanas, cuotas y backups.
 3. Configurar HTTPS, `COOKIE_SECURE=true` y `APP_ORIGIN` exacto detrás del proxy. Añadir límites de frecuencia/carga en el perímetro, observabilidad y control de acceso para pedidos y archivos privados. El MVP tiene límites de cuerpo, validación de contenido y protección de origen, pero no cuotas distribuidas ni cuentas.
 4. Reemplazar el proveedor demo por una integración de pagos con credenciales solo en servidor, verificación de webhooks e idempotencia de la pasarela. No marcar un pedido como pagado desde el navegador.
